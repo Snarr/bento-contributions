@@ -14,7 +14,7 @@ const App = ({ Component, pageProps }) => (
         content="Generate a Bento tile to display your latest GitHub contributions!"
       />
     </Head>
-    <Component {...pageProps} />
+    <Component {...pageProps}/>
     <Analytics />
   </>
 );

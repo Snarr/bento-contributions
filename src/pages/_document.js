@@ -22,10 +22,7 @@ export default class extends Document {
           `
             }}
           />
-          <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400&display=swap"
-          />
+          <link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'/>
           <link
             rel="apple-touch-icon"
             sizes="180x180"

@@ -171,9 +171,6 @@ const App = () => {
           autoFocus
         />
         <button className="bentoButton" type="submit" disabled={username.length <= 0 || loading}>
-          <span role="img" aria-label="Stars">
-            ✨
-          </span>{" "}
           {loading ? "Generating..." : "Generate!"}
         </button>
       </form>
