@@ -21,13 +21,14 @@ const App = () => {
   const [rows, setRows] = useState(5);
   const [columns, setColumns] = useState(5);
   const [padding, setPadding] = useState(75);
+  const [size, setSize] = useState(100);
 
   useEffect(() => {
     if (!data) {
       return;
     }
     draw();
-  }, [data, theme, rows, columns, padding]);
+  }, [data, theme, rows, columns, size, padding]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -89,6 +90,7 @@ const App = () => {
       username: username,
       themeName: theme,
       footerText: "Made by @sallar & friends - github-contributions.vercel.app",
+      size: size,
       rows: rows,
       columns: columns,
       padding: padding
@@ -212,12 +214,14 @@ const App = () => {
     );
   };
 
-  const _renderSliders = (setR, setC, setP) => {
+  const _renderSliders = (setR, setC, setS, setP) => {
     return (<div style={{display: "flex", flexDirection:"column"}}>
         <label>Rows: {rows}</label>
         <input type="range" min="0" max="10" value={rows} step="1" onChange={(event) => setR(parseInt(event.target.value))}></input>
         <label>Columns: {columns}</label>
         <input type="range" min="0" max="10" value={columns} step="1" onChange={(event) => setC(parseInt(event.target.value))}></input>
+        <label>Size: {size}</label>
+        <input type="range" min="5" max="200" value={size} step="5" onChange={(event) => setS(parseInt(event.target.value))}></input>
         <label>Padding: {padding}</label>
         <input type="range" min="50" max="150" value={padding} step="25" onChange={(event) => setP(parseInt(event.target.value))}></input>
       </div>)
@@ -232,7 +236,7 @@ const App = () => {
           <h4>All your contributions in one image!</h4>
         </div>
         {_renderForm()}
-        {_renderSliders(setRows, setColumns, setPadding)}
+        {_renderSliders(setRows, setColumns, setSize, setPadding)}
         <ThemeSelector
           currentTheme={theme}
           onChangeTheme={(themeName) => setTheme(themeName)}

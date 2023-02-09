@@ -1,36 +1,46 @@
+import { themes } from '../utils/themes'
 
-export const drawContributions = (ref, {data, username, themeName, footerText, rows, columns, padding}) => {
-  let date = daysIntoYear(new Date());
+export const drawContributions = (canvas, {data, username, themeName, footerText, size, rows, columns, padding}) => {
+  var curr = new Date;
+  var first = curr.getDate() - curr.getDay();
+  var last = first + 6;
+  var lastday = new Date(curr.setDate(last))
+  let date = daysIntoYear(lastday);
   let contributions = data.contributions;
-  let lastXcontributions = contributions.slice(365-date, 365-date+(rows*columns));
-  drawXContributions(ref, lastXcontributions, rows, columns, padding);
-}
+  let max = Math.max(rows, columns)
+  
+  let lastXcontributions = contributions.slice(365-date, 365-date+(max*max));
 
-function drawXContributions(canvas, data, rows, columns, padding) {
   canvas.width = 1000;
   canvas.height = 1000;
   const ctx = canvas.getContext('2d');
-  ctx.fillStyle = "white"
+  ctx.fillStyle = themes[themeName].background
   ctx.fillRect(0, 0, 1000, 1000);
 
-  const size = 100;
-  let gapX = (1000-(columns*size)-(2*padding))/(columns-1);
-  let gapY = (1000-(rows*size)-(2*padding))/(rows-1);
+  let gapC = (1000-(columns*size)-(2*padding))/(columns-1);
+  let gapR = (1000-(rows*size)-(2*padding))/(rows-1);
 
-  for (let i = 0; i < rows; i++) {
-    for (let j = 0; j < columns; j++) {
-      ctx.fillStyle = data[rows*i + j].color
+  for (let c = columns-1; c >= 0; c--) {
+    for (let r = rows-1; r >= 0; r--) {
+      let realCount = rows*(rows-r-1) + (columns-c-1)
+      ctx.fillStyle = themes[themeName][`grade${lastXcontributions[realCount].intensity}`]
+      
 
-      let posX = padding + gapX*j + size*j;
-      let posY = padding + gapY*i + size*i;
+      let posX = padding + gapR*r + size*r; // X position calculated based on 
+      let posY = padding + gapC*c + size*c;
 
+      // ctx.font = "75px"
+      // ctx.fillText(realCount, posX, posY)
       ctx.beginPath();
       ctx.roundRect(posX, posY, size, size, 15);
       ctx.fill();
       ctx.closePath();
     }
   }
-  // console.log(canvas.toDataURL())
+}
+
+function drawXContributions(canvas, data, size, rows, columns, padding) {
+  
 }
 
 function daysIntoYear(date){
