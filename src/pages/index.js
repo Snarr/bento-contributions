@@ -131,7 +131,7 @@ const App = () => {
     return (
       <div
         className="App-result"
-        style={{ display: data !== null && !loading ? "block" : "none" }}
+        style={{ display: data !== null && !loading ? "flex" : "none" }}
       >
         <p>Your chart is ready!</p>
 
@@ -164,7 +164,14 @@ const App = () => {
               )}
             </div>
 
-            <canvas ref={canvasRef} />
+            <div className="bentoCard">
+              <canvas className="preview" ref={canvasRef} />
+              {/* <div className="captionBoxContainer">
+                <div className="captionBox">
+                  my recent github contributions
+                </div>
+              </div> */}
+            </div>
           </>
         )}
       </div>
@@ -229,43 +236,45 @@ const App = () => {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div className="App-logo">
-          <img src="/topguntocat.png" width={200} alt="Topguntocat" />
-          <h1>GitHub Contributions Chart Generator</h1>
-          <h4>All your contributions in one image!</h4>
-        </div>
-        {_renderForm()}
-        {_renderSliders(setRows, setColumns, setSize, setPadding)}
-        <ThemeSelector
-          currentTheme={theme}
-          onChangeTheme={(themeName) => setTheme(themeName)}
-        />
-        {_renderGithubButton()}
-        <footer>
-          <p>
-            Not affiliated with GitHub Inc. Octocat illustration from{" "}
-            <a href="https://octodex.github.com/topguntocat/" target="_blank">
-              GitHub Octodex
-            </a>
-            .
-          </p>
-          {_renderDownloadAsJSON()}
-          <div className="App-powered">
-            <a
-              href="https://vercel.com/?utm_source=github-contributions-chart&utm_campaign=oss"
-              target="_blank"
-            >
-              <img src="/powered-by-vercel.svg" alt="Powered by Vercel" />
-            </a>
-          </div>
-        </footer>
-      </header>
-      <section className="App-content" ref={contentRef}>
-        {loading && _renderLoading()}
-        {error !== null && _renderError()}
-        {_renderGraphs()}
-      </section>
+      <div className="App-center">
+        <header className="App-header">
+          {/* <div className="App-logo">
+            <img src="/topguntocat.png" width={200} alt="Topguntocat" />
+            <h1>GitHub Contributions Chart Generator</h1>
+            <h4>All your contributions in one image!</h4>
+          </div> */}
+          {_renderForm()}
+          {_renderSliders(setRows, setColumns, setSize, setPadding)}
+          <ThemeSelector
+            currentTheme={theme}
+            onChangeTheme={(themeName) => setTheme(themeName)}
+          />
+          {_renderGithubButton()}
+          <footer>
+            <p>
+              Not affiliated with GitHub Inc. Octocat illustration from{" "}
+              <a href="https://octodex.github.com/topguntocat/" target="_blank">
+                GitHub Octodex
+              </a>
+              .
+            </p>
+            {_renderDownloadAsJSON()}
+            <div className="App-powered">
+              <a
+                href="https://vercel.com/?utm_source=github-contributions-chart&utm_campaign=oss"
+                target="_blank"
+              >
+                <img src="/powered-by-vercel.svg" alt="Powered by Vercel" />
+              </a>
+            </div>
+          </footer>
+        </header>
+        <section className="App-content" ref={contentRef}>
+          {loading && _renderLoading()}
+          {error !== null && _renderError()}
+          {_renderGraphs()}
+        </section>
+      </div>
     </div>
   );
 };
