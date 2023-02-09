@@ -1,7 +1,8 @@
 :root {
   --bg: #fff;
   --header-bg: #f4f5f6;
-  --button-bg: #9b4dca;
+  --button-bg: rgb(78,221,118);
+  --button-bg-hover: rgb(61,218,125);
   --button-disabled: #cfd0d4;
   --button-disabled-border: #cfd0d4;
   --button-text: #fff;
@@ -110,6 +111,14 @@ html {
   border: 1px rgba(0,0,0,0.08) solid;
 }
 
+.bentoButton {
+  border-radius: 8px;
+  background-color: var(--button-bg);
+}
+.bentoButton:hover {
+  background-color: var(--button-bg-hover);
+}
+
 .captionBoxContainer {
   position: absolute;
   max-width: 100%;
@@ -203,6 +212,11 @@ button {
   font-size: 0.8em;
   outline: none;
   cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 3px 2px rgb(0 0 0 / 6%);
+}
+button:hover {
+  background-color: var(--button-bg-hover);
 }
 
 .App-content button {
@@ -214,6 +228,9 @@ button:disabled {
   background-color: var(--button-disabled);
   border: 0.1rem solid var(--button-disabled-border);
   cursor: not-allowed;
+}
+button:disabled:hover {
+  background-color: var(--button-disabled);
 }
 
 form input {

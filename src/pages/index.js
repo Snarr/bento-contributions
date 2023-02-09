@@ -18,8 +18,8 @@ const App = () => {
   const [theme, setTheme] = useState("standard");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
-  const [rows, setRows] = useState(5);
-  const [columns, setColumns] = useState(5);
+  const [rows, setRows] = useState(7);
+  const [columns, setColumns] = useState(7);
   const [padding, setPadding] = useState(75);
   const [size, setSize] = useState(100);
 
@@ -136,34 +136,7 @@ const App = () => {
         <p>Your chart is ready!</p>
 
         {data !== null && (
-          <>
-            <div className="App-buttons">
-              <button
-                className="App-download-button"
-                onClick={onDownload}
-                type="button"
-              >
-                Download the Image
-              </button>
-              {global.navigator && "share" in navigator ? (
-                <button
-                  className="App-download-button"
-                  onClick={onShare}
-                  type="button"
-                >
-                  Share
-                </button>
-              ) : (
-                <button
-                  className="App-twitter-button"
-                  onClick={onShareTwitter}
-                  type="button"
-                >
-                  Share on Twitter
-                </button>
-              )}
-            </div>
-
+          <div style={{display: "flex", flexDirection: "column", gap:"2rem"}}>
             <div className="bentoCard">
               <canvas className="preview" ref={canvasRef} />
               {/* <div className="captionBoxContainer">
@@ -172,7 +145,13 @@ const App = () => {
                 </div>
               </div> */}
             </div>
-          </>
+            
+            <div className="App-buttons">
+              <button className="App-download-button" onClick={onDownload} type="button">
+                Download the Image
+              </button>
+            </div>
+          </div>
         )}
       </div>
     );
@@ -191,7 +170,7 @@ const App = () => {
           autoCapitalize="none"
           autoFocus
         />
-        <button type="submit" disabled={username.length <= 0 || loading}>
+        <button className="bentoButton" type="submit" disabled={username.length <= 0 || loading}>
           <span role="img" aria-label="Stars">
             ✨
           </span>{" "}
@@ -249,8 +228,8 @@ const App = () => {
             currentTheme={theme}
             onChangeTheme={(themeName) => setTheme(themeName)}
           />
-          {_renderGithubButton()}
-          <footer>
+          {/* {_renderGithubButton()} */}
+          {/* <footer>
             <p>
               Not affiliated with GitHub Inc. Octocat illustration from{" "}
               <a href="https://octodex.github.com/topguntocat/" target="_blank">
@@ -267,7 +246,7 @@ const App = () => {
                 <img src="/powered-by-vercel.svg" alt="Powered by Vercel" />
               </a>
             </div>
-          </footer>
+          </footer> */}
         </header>
         <section className="App-content" ref={contentRef}>
           {loading && _renderLoading()}
