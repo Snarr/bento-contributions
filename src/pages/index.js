@@ -18,13 +18,16 @@ const App = () => {
   const [theme, setTheme] = useState("standard");
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
+  const [rows, setRows] = useState(5);
+  const [columns, setColumns] = useState(5);
+  const [padding, setPadding] = useState(75);
 
   useEffect(() => {
     if (!data) {
       return;
     }
     draw();
-  }, [data, theme]);
+  }, [data, theme, rows, columns, padding]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -79,13 +82,16 @@ const App = () => {
       return;
     }
 
-    const { drawContributions } = await import("github-contributions-canvas");
+    const { drawContributions } = await import("../utils/customDraw");
 
     drawContributions(canvasRef.current, {
       data,
       username: username,
       themeName: theme,
-      footerText: "Made by @sallar & friends - github-contributions.vercel.app"
+      footerText: "Made by @sallar & friends - github-contributions.vercel.app",
+      rows: rows,
+      columns: columns,
+      padding: padding
     });
     contentRef.current.scrollIntoView({
       behavior: "smooth"
@@ -206,6 +212,17 @@ const App = () => {
     );
   };
 
+  const _renderSliders = (setR, setC, setP) => {
+    return (<div style={{display: "flex", flexDirection:"column"}}>
+        <label>Rows: {rows}</label>
+        <input type="range" min="0" max="10" value={rows} step="1" onChange={(event) => setR(parseInt(event.target.value))}></input>
+        <label>Columns: {columns}</label>
+        <input type="range" min="0" max="10" value={columns} step="1" onChange={(event) => setC(parseInt(event.target.value))}></input>
+        <label>Padding: {padding}</label>
+        <input type="range" min="50" max="150" value={padding} step="25" onChange={(event) => setP(parseInt(event.target.value))}></input>
+      </div>)
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -215,6 +232,7 @@ const App = () => {
           <h4>All your contributions in one image!</h4>
         </div>
         {_renderForm()}
+        {_renderSliders(setRows, setColumns, setPadding)}
         <ThemeSelector
           currentTheme={theme}
           onChangeTheme={(themeName) => setTheme(themeName)}
