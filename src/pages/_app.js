@@ -8,10 +8,10 @@ import Head from "next/head";
 const App = ({ Component, pageProps }) => (
   <>
     <Head>
-      <title>GitHub Contributions Chart Generator</title>
+      <title>GitHub Contributions for Bento</title>
       <meta
         name="description"
-        content="See all of your GitHub contributions in one image!"
+        content="Generate a Bento tile to display your latest GitHub contributions!"
       />
     </Head>
     <Component {...pageProps} />
