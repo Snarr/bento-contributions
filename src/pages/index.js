@@ -199,9 +199,9 @@ const App = () => {
 
   const _renderSliders = (setR, setC, setS, setP) => {
     return (<div style={{display: "flex", flexDirection:"column"}}>
-        <label>Rows: {rows}</label>
+        <label>Columns: {rows}</label>
         <input type="range" min="0" max="10" value={rows} step="1" onChange={(event) => setR(parseInt(event.target.value))}></input>
-        <label>Columns: {columns}</label>
+        <label>Rows: {columns}</label>
         <input type="range" min="0" max="10" value={columns} step="1" onChange={(event) => setC(parseInt(event.target.value))}></input>
         <label>Size: {size}</label>
         <input type="range" min="5" max="200" value={size} step="5" onChange={(event) => setS(parseInt(event.target.value))}></input>
